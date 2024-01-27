@@ -201,6 +201,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4f0f31a9-15c7-4207-a6e2-ce01c8ce099e",
+                    "path": "<Mouse>/{Primary2DMotion}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",

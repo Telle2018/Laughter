@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed = 1;
+    [SerializeField] private float _rotspeed = 90;
 
     private float _moveHoriz;
     private float _moveVert;
@@ -34,14 +35,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Check if player is moving
-        if (((Mathf.Abs(_moveHoriz) > 0.1f || Mathf.Abs(_moveVert) > 0.1f)) && _isMovable)
+        if ((Mathf.Abs(_moveVert) > 0.1f) && _isMovable)
         {
             // Move player
-            Vector3 movement = new Vector3(_moveHoriz, 0.0f, _moveVert);
-            transform.position += movement * _speed * Time.deltaTime;
-            transform.rotation = Quaternion.identity * Quaternion.AngleAxis(Mathf.Atan2(_moveHoriz, _moveVert) * Mathf.Rad2Deg, Vector3.up);
+            transform.position += transform.forward * _moveVert * Time.deltaTime * _speed;
 
             _isWalking = true;
+        }
+        else if ((Mathf.Abs(_moveHoriz) > 0.1f ) && _isMovable)
+        {
+            transform.rotation = transform.rotation * Quaternion.AngleAxis(_moveHoriz * _rotspeed * Time.deltaTime, Vector3.up);
             _lastRotation = transform.rotation;
         }
         else
