@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _playerRB = GetComponent<Rigidbody>();
+        _playerRB.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         //_animator = GetComponent<Animator>();
     }
 
@@ -38,7 +39,14 @@ public class PlayerController : MonoBehaviour
         if ((Mathf.Abs(_moveVert) > 0.1f) && _isMovable)
         {
             // Move player
-            transform.position += transform.forward * _moveVert * Time.deltaTime * _speed;
+            if (_moveVert > 0.0f)
+            {
+                transform.position += transform.forward * Time.deltaTime * _speed;
+            }
+            else
+            {
+                transform.position -= transform.forward * Time.deltaTime * _speed;
+            }
 
             _isWalking = true;
         }
@@ -59,8 +67,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
 
-        _moveHoriz = -1 * movementVector.x;
-        _moveVert = -1 * movementVector.y;
+        _moveHoriz = 1 * movementVector.x;
+        _moveVert = 1 * movementVector.y;
 
     }
 
